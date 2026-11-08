@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d47a1">
+<title>TechnoLearn | منصة تقنية</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="no.jpg">
+<link rel="apple-touch-icon" href="no.jpg">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="TechnoLearn">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1565c0;
+  --blue-d:#0d47a1;
+  --blue-l:#e8f1fd;
+  --sky:#0284c7;
+  --orange:#f97316;
+  --orange-d:#ea580c;
+  --orange-l:#fff7ed;
+  --bg:#f5f8ff;
+  --card:#ffffff;
+  --text:#14213d;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --shadow:0 8px 24px rgba(21,101,192,.08);
+  --r:20px;
+  --fs:clamp(13px,3.4vw,15px)
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Tajawal',sans-serif;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-size:var(--fs);min-height:100dvh;overflow-x:hidden;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+a{text-decoration:none;color:inherit}button{cursor:pointer;border:0;background:none}
+.wrap{position:relative;width:100%;max-width:1000px;margin:0 auto;padding-bottom:40px}
+
+/* App Header Bar */
+.app-header{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:linear-gradient(135deg,#0d47a1,#1565c0);color:#fff;box-shadow:0 4px 16px rgba(21,101,192,.15)}
+.app-brand-grp{display:flex;align-items:center;gap:12px}
+.app-logo-box{width:42px;height:42px;border-radius:12px;background:var(--orange-l);display:grid;place-items:center;font-weight:900;font-size:18px;color:var(--orange);box-shadow:0 2px 6px rgba(0,0,0,.1);overflow:hidden}
+.app-logo-box img{width:100%;height:100%;object-fit:cover}
+.app-titles b{display:block;font-size:1.15em;font-weight:900;letter-spacing:.5px;line-height:1.2;color:#fff}
+.app-titles small{font-size:.78em;opacity:.9;font-weight:500}
+.app-actions{display:flex;align-items:center;gap:10px}
+.app-icon-btn{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.15);color:#fff;display:grid;place-items:center;font-size:18px;transition:.2s}
+.app-icon-btn:active{transform:scale(.92);background:rgba(255,255,255,.3)}
+
+.main-content{padding:16px clamp(12px,4vw,20px)}
+
+/* Hero Slider Carousel */
+.slider-container{position:relative;width:100%;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px;background:#fff;border:1px solid var(--line)}
+.slider-wrapper{display:flex;transition:transform .5s ease-in-out;width:100%}
+.slide{min-width:100%;position:relative;aspect-ratio:16/8.2;max-height:310px;background:#f8fafc;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.slide img{width:100%;height:100%;object-fit:cover;opacity:.92}
+.slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,71,161,.85) 10%,transparent 65%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px 20px;color:#fff}
+.slide-title{font-size:clamp(18px,5vw,24px);font-weight:900;margin-bottom:4px;text-shadow:0 2px 4px rgba(0,0,0,.3)}
+.slide-desc{font-size:.9em;opacity:.95;line-height:1.5;margin-bottom:6px;max-width:90%;text-shadow:0 1px 3px rgba(0,0,0,.3)}
+.slide-price{font-size:.92em;font-weight:800;color:#fde047;background:rgba(0,0,0,.4);padding:4px 10px;border-radius:8px;display:inline-block;width:max-content}
+
+.dots{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:-10px;margin-bottom:16px;z-index:2;position:relative}
+.dot{width:10px;height:10px;border-radius:50%;background:#cbd5e1;transition:.3s;cursor:pointer}
+.dot.active{width:28px;border-radius:12px;background:var(--orange)}
+
+/* Profile Welcome Card */
+.profile-card{background:var(--card);color:var(--text);border-radius:24px;padding:22px;margin-bottom:24px;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
+.prof-header{display:flex;flex-direction:column;gap:6px}
+.user-info h3{font-size:1.25em;font-weight:900;margin-bottom:2px;color:var(--blue-d)}
+.user-info p{font-size:.88em;color:var(--muted);line-height:1.6}
+
+/* Social Icons */
+.card-socials-wrapper{display:flex;flex-direction:column;align-items:center;gap:8px;margin:4px 0}
+.card-socials-title{font-size:.85em;color:var(--muted);font-weight:700}
+.card-socials{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.c-soc{position:relative;width:48px;height:48px;border-radius:16px;display:grid;place-items:center;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:.3s;overflow:hidden}
+.c-soc svg{width:52%;height:52%;fill:currentColor;transition:.3s}
+.c-soc::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.4) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s}
+.c-soc:hover{transform:translateY(-4px) scale(1.08);box-shadow:0 8px 18px rgba(0,0,0,.25)}
+.c-soc:hover::after{transform:translateX(120%)}
+
+.s-wa{background:#25d366;}
+.s-ig{background:radial-gradient(circle at 30% 107%, #fdf497 0%, #df3456 45%, #d6249f 60%, #285AEB 90%);}
+.s-tg{background:#0088cc;}
+.s-fb{background:#1877f2;}
+
+.card-action-btn{width:100%;padding:13px;border-radius:14px;background:var(--bg);color:var(--blue-d);font-weight:900;font-size:1em;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:none;border:1.5px solid var(--line);transition:.2s}
+.card-action-btn:active{transform:scale(.98);background:var(--line)}
+
+/* Sections */
+.sec{margin-top:26px}
+.sec.hidden-sec{display:none !important;}
+.sec-h{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.sec-h .e{font-size:clamp(24px,6vw,30px);color:var(--orange)}
+.sec-h h2{font-size:clamp(17px,4.5vw,21px);font-weight:900;color:var(--blue-d)}
+.sec-h i{flex:1;height:3px;border-radius:99px;background:linear-gradient(90deg,var(--orange),transparent);opacity:.5}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);transition:.25s}
+.svc{padding:18px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer}
+.svc:active,.tool:active{transform:scale(.97)}
+.emo{width:clamp(62px,18vw,78px);aspect-ratio:1;border-radius:20px;display:grid;place-items:center;font-size:clamp(32px,10vw,42px);background:var(--orange-l);margin-bottom:4px;box-shadow:inset 0 0 0 1px var(--line);color:var(--orange);overflow:hidden}
+.emo img{width:100%;height:100%;object-fit:cover}
+.svc b,.tool b{font-size:1.05em;font-weight:800;color:var(--blue-d)}
+.svc p,.tool p{color:var(--muted);font-size:.88em;line-height:1.6}
+.tool{padding:16px;display:flex;flex-direction:column;gap:6px;height:100%}
+.tool .emo{width:54px;font-size:28px;border-radius:16px;align-self:flex-start}
+.tool em{margin-top:auto;font-style:normal;font-weight:800;color:var(--sky);font-size:.9em;padding-top:6px}
+
+/* Horizontal Teachers Scroll */
+.hscroll{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 16px;margin:0 -4px;scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.prof-card{flex:0 0 min(72%,220px);scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:.25s}
+.prof-card:hover{transform:translateY(-3px);border-color:var(--sky)}
+.prof-img{width:86px;height:86px;border-radius:50%;object-fit:cover;margin-bottom:10px;border:3px solid var(--orange-l);box-shadow:0 4px 12px rgba(21,101,192,.08)}
+.prof-name{font-size:1.1em;font-weight:800;color:var(--blue-d);margin-bottom:2px}
+.prof-spec{font-size:.85em;font-weight:700;color:var(--orange);background:var(--orange-l);padding:3px 10px;border-radius:99px;margin-bottom:8px;display:inline-block}
+.prof-bio{font-size:.88em;color:var(--muted);line-height:1.6}
+
+/* Bottom Banner */
+.banner{margin-top:28px;padding:clamp(22px,6vw,32px);text-align:center;border-radius:24px;color:#fff;background:linear-gradient(135deg,var(--sky),var(--blue));box-shadow:var(--shadow);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.2)}
+.banner::after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.15);left:-50px;bottom:-70px}
+.banner>*{position:relative;z-index:1}.banner h3{font-size:clamp(19px,5vw,25px);font-weight:900;margin-bottom:6px;color:#fff}.banner p{opacity:.95;line-height:1.8;margin-bottom:16px;color:#f0f9ff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:1.02em;padding:13px 24px;border-radius:14px;color:var(--blue-d);background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.1);transition:.25s;min-height:48px}
+.btn.or{background:#fff;color:var(--blue-d)}
+.empty{color:var(--muted);text-align:center;padding:16px;width:100%;background:var(--card);border-radius:var(--r);border:1px dashed var(--line)}
+.foot{text-align:center;color:var(--muted);margin-top:28px;font-size:.9em}.foot b{color:var(--blue-d)}
+.inst-logo{width:84px;height:84px;border-radius:22px;object-fit:cover;display:block;margin:0 auto 10px;box-shadow:var(--shadow)}
+.steps{margin:6px 22px 14px 0;line-height:2;font-weight:600}
+.steps li{padding-inline-start:4px}
+.warn{background:var(--orange-l);color:var(--orange-d);padding:10px 12px;border-radius:12px;line-height:1.7;font-size:.92em;margin-bottom:10px}
+
+/* Modal Windows */
+.ov{position:fixed;inset:0;z-index:50;background:rgba(13,71,161,.35);backdrop-filter:blur(4px);display:none;align-items:flex-end;justify-content:center}
+.ov.on{display:flex}
+.mod{width:100%;max-width:480px;max-height:92dvh;overflow:auto;background:var(--card);border-radius:28px 28px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom));animation:up .3s;border:1px solid var(--line)}
+@media(min-width:600px){.ov{align-items:center}.mod{border-radius:28px}}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.mod h3{font-size:1.3em;font-weight:900;margin-bottom:4px;color:var(--blue-d)}.mod .d{color:var(--muted);margin-bottom:14px;line-height:1.7}
+input,textarea{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;font-size:16px;background:var(--bg);color:var(--text);margin-bottom:10px;outline:0;transition:.2s;direction:rtl}
+input:focus,textarea:focus{border-color:var(--orange);background:#fff;box-shadow:0 0 0 3px rgba(249,115,22,.15)}
+textarea{min-height:80px;resize:vertical}
+select{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;font-size:16px;background:var(--bg);color:var(--text);margin-bottom:10px;outline:0;direction:rtl;font-weight:700}
+select:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(249,115,22,.15)}
+.linkbox{background:var(--bg);border:1.5px dashed var(--line);border-radius:16px;padding:12px;margin-top:6px}
+.linkbox input,.linkbox select{background:#fff;margin-bottom:8px}
+.x{float:left;width:38px;height:38px;border-radius:50%;background:var(--bg);color:var(--text);font-size:16px;display:grid;place-items:center;border:1px solid var(--line)}
+.toast{position:fixed;bottom:calc(86px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(30px);background:var(--blue-d);color:#fff;padding:12px 20px;border-radius:14px;font-weight:700;z-index:99;opacity:0;transition:.3s;pointer-events:none;max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%)}
+
+/* Dashboard Drawer */
+#dash{position:fixed;inset:0;z-index:60;background:var(--bg);display:none;flex-direction:column;height:100dvh}
+#dash.on{display:flex}
+.dh{display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:var(--card);border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(21,101,192,.04)}
+.dh img{width:40px;height:40px;border-radius:50%;object-fit:cover}.dh h2{font-size:1.1em;font-weight:900;flex:1;color:var(--blue-d)}.dh h2 small{display:block;font-size:.7em;color:var(--muted);font-weight:500}
+.dh button{padding:9px 14px;border-radius:12px;font-weight:800;background:var(--orange-l);color:var(--orange)}.dh .out{background:#fef2f2;color:#991b1b}
+.dbody{display:flex;flex:1;min-height:0;flex-direction:column}
+.dnav{order:2;display:flex;background:var(--card);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));overflow-x:auto;scrollbar-width:none}
+.dnav::-webkit-scrollbar{display:none}
+.dnav button{flex:1 0 64px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px;border-radius:14px;font-size:11px;font-weight:700;color:var(--muted);position:relative}
+.dnav button span{font-size:22px}.dnav button.on{background:var(--orange-l);color:var(--orange)}
+.dmain{order:1;flex:1;overflow:auto;padding:16px clamp(12px,4vw,28px) 24px;-webkit-overflow-scrolling:touch}
+.dc{max-width:760px;margin:0 auto}
+@media(min-width:860px){.dbody{flex-direction:row}.dnav{order:0;flex-direction:column;width:200px;border-top:0;border-left:1px solid var(--line);padding:14px 10px;overflow:auto}.dnav button{flex:none;flex-direction:row;font-size:14px;gap:10px;padding:12px;justify-content:flex-start}.dnav button span{font-size:20px}}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
+@media(min-width:600px){.stats{grid-template-columns:repeat(3,1fr)}}
+.stat{padding:16px;text-align:center}.stat .e{font-size:32px;color:var(--orange)}.stat b{display:block;font-size:1.8em;font-weight:900;color:var(--blue-d)}.stat small{color:var(--muted);font-weight:700}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.panel h4{font-size:1.05em;font-weight:900;margin-bottom:10px;color:var(--blue-d)}
+label{display:block;font-weight:700;font-size:.88em;color:var(--muted);margin:0 2px 4px}
+.ei-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.emo-btn{width:56px;height:56px;border-radius:16px;font-size:28px;background:var(--orange-l);border:2px dashed var(--orange);color:var(--orange);display:grid;place-items:center;overflow:hidden}
+.emo-btn img{width:100%;height:100%;object-fit:cover}
+.ei-act{display:flex;gap:6px}.ei-act button{width:40px;height:40px;border-radius:12px;background:var(--bg);font-size:15px;border:1px solid var(--line)}.ei-act .del{background:#fef2f2;color:#991b1b}
+.add{width:100%;padding:14px;border-radius:16px;font-weight:900;color:#fff;background:var(--orange);font-size:1em;box-shadow:0 4px 12px rgba(249,115,22,.2)}
+.row2{display:flex;gap:8px;margin-top:6px}.row2 button{flex:1;padding:12px;border-radius:12px;font-weight:800}
+.no{background:#fef2f2;color:#991b1b}.bl{background:var(--orange-l);color:var(--orange)}
+.upl{display:flex;align-items:center;gap:14px;margin-bottom:12px}.upl img{width:80px;height:80px;object-fit:cover;border-radius:14px;background:#fff;border:2px solid var(--line)}
+.egrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;max-height:220px;overflow-y:auto}
+.egrid button{aspect-ratio:1;font-size:clamp(22px,6.5vw,30px);border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.egrid button:active{background:var(--orange-l)}
+.hint{background:var(--orange-l);color:var(--orange-d);padding:10px 12px;border-radius:12px;line-height:1.7;font-size:.88em;margin-bottom:12px}
+.pw{position:relative}.pw input{padding-left:52px}
+.eye{position:absolute;left:6px;top:4px;width:44px;height:44px;border-radius:12px;font-size:22px;background:transparent}
+.err{display:none;background:#fef2f2;color:#991b1b;border:1.5px solid #fecaca;padding:11px 14px;border-radius:12px;font-weight:700;line-height:1.7;margin:-2px 0 12px}
+.err.on{display:block}
+input.bad{border-color:#ef4444!important;background:#fff5f5!important}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.forgot{display:none;width:100%;margin-top:12px;padding:12px;border-radius:14px;font-weight:800;background:var(--orange-l);color:var(--orange-d)}.forgot.on{display:block}
+button:disabled{opacity:.6;pointer-events:none}
+/* ===== صفحة معلومات الخدمة ===== */
+#svcPage{position:fixed;inset:0;z-index:42;background:var(--bg);display:none;flex-direction:column;overscroll-behavior:contain}
+#svcPage.on{display:flex}
+.sp-top{display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:var(--card);border-bottom:1px solid var(--line)}
+.sp-top button{padding:9px 14px;border-radius:12px;background:var(--bg);font-weight:800;color:var(--blue-d)}
+.sp-top b{flex:1;font-weight:900;color:var(--blue-d)}
+.sp-body{flex:1;overflow:auto;padding:20px 16px calc(28px + env(safe-area-inset-bottom));max-width:640px;width:100%;margin:0 auto}
+.sp-hero{text-align:center;margin-bottom:18px}
+.sp-hero .emo{margin:0 auto 10px;width:96px;font-size:50px}
+.sp-hero h2{font-size:1.45em;font-weight:900;color:var(--blue-d);margin-bottom:4px}
+.sp-hero p{color:var(--muted);line-height:1.7}
+.sp-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow);line-height:1.95}
+.sp-card h4{color:var(--blue-d);font-weight:900;margin-bottom:8px}
+.sp-card p{margin-bottom:10px}.sp-card ul{padding-right:22px;margin-bottom:10px;list-style:disc}.sp-card li{margin-bottom:6px}
+.sp-acts{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.sp-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:15px;border-radius:16px;font-weight:900;font-size:1.02em;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.1)}
+.sp-btn:active{transform:scale(.98)}
+.sp-btn.main{background:linear-gradient(135deg,var(--blue),var(--blue-d));color:#fff}
+.sp-btn.wa{background:#25d366;color:#fff}
+.sp-note{text-align:center;color:var(--muted);font-size:.88em;margin-top:10px}
+/* ===== الزر العائم + الأسئلة المتكررة ===== */
+#fab{position:fixed;left:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:40;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--orange),#fb923c);color:#fff;font-size:26px;display:grid;place-items:center;box-shadow:0 8px 22px rgba(249,115,22,.45);transition:transform .2s}
+#fab:active{transform:scale(.92)}
+#fab::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--orange);animation:ping 2s infinite;pointer-events:none}
+#fab.open::after{display:none}
+@keyframes ping{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.55);opacity:0}}
+#chat{position:fixed;left:12px;bottom:calc(86px + env(safe-area-inset-bottom));z-index:41;width:min(380px,calc(100vw - 24px));max-height:min(560px,calc(100dvh - 130px));background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:0 18px 50px rgba(13,71,161,.28);display:none;flex-direction:column;overflow:hidden}
+#chat.on{display:flex}
+.ch-h{display:flex;align-items:center;gap:10px;padding:12px 14px;background:linear-gradient(135deg,var(--blue),var(--blue-d));color:#fff}
+.ch-h img{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#fff}
+.ch-h div{flex:1;line-height:1.3}.ch-h b{display:block;font-weight:900}.ch-h small{opacity:.85;font-weight:600}
+.ch-h button{color:#fff;font-size:18px;padding:4px 8px}
+.fq-s{padding:10px 12px 4px;background:var(--card)}
+.fq-s input{margin:0;padding:11px 14px;font-size:15px}
+#faqList{flex:1;overflow:auto;padding:6px 12px 10px;background:var(--card);min-height:120px}
+.fq-item{border:1px solid var(--line);border-radius:14px;margin-top:8px;background:var(--bg);overflow:hidden}
+.fq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;text-align:right;font-weight:800;color:var(--blue-d);line-height:1.6}
+.fq-q i{font-style:normal;transition:transform .2s;color:var(--orange);flex:none}
+.fq-a{display:none;padding:0 14px 14px;line-height:1.9;color:var(--text);white-space:pre-wrap;word-break:break-word}
+.fq-item.open{background:#fff;border-color:var(--orange)}
+.fq-item.open .fq-a{display:block}
+.fq-item.open .fq-q i{transform:rotate(180deg)}
+.fq-empty{text-align:center;color:var(--muted);padding:26px 10px;font-weight:700}
+.fq-foot{padding:10px 12px 12px;background:var(--card);border-top:1px solid var(--line);text-align:center}
+.fq-foot span{display:block;color:var(--muted);font-weight:700;font-size:.88em;margin-bottom:8px}
+.fq-foot .sp-btn{padding:12px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <!-- Top Application Bar -->
+  <header class="app-header">
+    <div class="app-brand-grp">
+      <div class="app-logo-box"><img id="logoImg" src="no.jpg" alt="TL"></div>
+      <div class="app-titles">
+        <b id="brand">TECHNOLEARN</b>
+        <small id="subTag">منصة تقنية</small>
+      </div>
+    </div>
+    <div class="app-actions">
+      <button class="app-icon-btn" onclick="logout()" title="تسجيل الخروج">🚪</button>
+      <button class="app-icon-btn" onclick="openLogin()" aria-label="لوحة التحكم">⚙️</button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <!-- Hero Banners Auto-Slider Carousel -->
+    <div class="slider-container">
+      <div class="slider-wrapper" id="sliderTrack"></div>
+    </div>
+    <div class="dots" id="sliderDots"></div>
+
+    <!-- Main Profile Welcome Card -->
+    <div class="profile-card">
+      <div class="prof-header">
+        <div class="user-info">
+          <h3>اهلا بكم معنا 👋</h3>
+          <p>⚡ شعارنا 💰 استجابة سريعة • 🏅 مصداقية • 💰 أنسب الأسعار • 🚚 سرعة في التسليم</p>
+        </div>
+      </div>
+      
+      <!-- Social Media Icons Centered -->
+      <div class="card-socials-wrapper">
+        <div class="card-socials-title">📱 تواصل معنا مباشرة عبر المنصات:</div>
+        <div class="card-socials" id="cardSocials"></div>
+      </div>
+
+      <button class="card-action-btn" id="installBtnCard" onclick="installApp()">
+        <span>📲</span>ثبت التطبيق على جهازك
+      </button>
+    </div>
+
+    <!-- كادر الأساتذة -->
+    <section class="sec" id="secTeachers">
+      <div class="sec-h"><span class="e">👨‍🏫</span><h2>كادر الأساتذة</h2><i></i></div>
+      <div class="hscroll" id="teachersScroll"></div>
+    </section>
+
+    <!-- أقسام الخدمات -->
+    <section class="sec" id="secServices">
+      <div class="sec-h"><span class="e">🎓</span><h2>خدماتنا الأكاديمية</h2><i></i></div>
+      <div class="grid" id="svcGrid"></div>
+    </section>
+
+    <!-- الأدوات المجانية -->
+    <section class="sec" id="secTools">
+      <div class="sec-h"><span class="e">🧰</span><h2>مواقع وصفحات مهمة ومفيدة</h2><i></i></div>
+      <div class="grid" id="toolGrid"></div>
+    </section>
+
+    <!-- البانر السفلي -->
+    <section class="banner">
+      <div style="font-size:42px">🌐</div>
+      <h3 id="bnT"></h3>
+      <p id="bnD"></p>
+      <a class="btn or" id="bnB" target="_blank" rel="noopener"></a>
+    </section>
+
+    <div class="foot" id="foot"></div>
+  </div>
+</div>
+
+<!-- صفحة معلومات الخدمة -->
+<div id="svcPage" role="dialog" aria-modal="true">
+  <div class="sp-top"><button type="button" onclick="closeSvc()">→ رجوع</button><b>معلومات الخدمة</b></div>
+  <div class="sp-body" id="spBody"></div>
+</div>
+
+<!-- الزر العائم: الأسئلة المتكررة -->
+<button type="button" id="fab" onclick="toggleChat()" aria-label="الأسئلة المتكررة">❓</button>
+<div id="chat" role="dialog" aria-label="الأسئلة المتكررة">
+  <div class="ch-h"><img id="cLogo" src="no.jpg" alt=""><div><b>الأسئلة المتكررة</b><small>اضغط على السؤال لعرض الإجابة</small></div><button type="button" onclick="toggleChat(false)" aria-label="إغلاق">✕</button></div>
+  <div class="fq-s"><input id="faqQ" type="search" placeholder="🔍 ابحث عن سؤالك..." oninput="faqOpen=-1;renderFaq()"></div>
+  <div id="faqList"></div>
+  <div class="fq-foot"><span>لم تجد إجابتك؟</span><a id="faqWa" class="sp-btn wa" href="#" target="_blank" rel="noopener">💬 اسأل فريق التطبيق عبر واتساب</a></div>
+</div>
+
+<!-- Modal: Login -->
+<div class="ov" id="loginM" onclick="if(event.target===this)closeAll()"><div class="mod">
+  <button class="x" onclick="closeAll()">✕</button><h3>🔐 دخول لوحة التحكم</h3><p class="d">أدخل بيانات المسؤول للمتابعة.</p>
+  <form onsubmit="doLogin(event)" autocomplete="off" novalidate>
+    <label>📧 البريد الإلكتروني</label>
+    <input id="lu" placeholder="البريد الإلكتروني" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" dir="ltr" oninput="clearErr()">
+    <label>🔑 كلمة المرور</label>
+    <div class="pw"><input id="lp" type="password" placeholder="كلمة المرور" autocomplete="new-password" autocapitalize="none" autocorrect="off" spellcheck="false" dir="ltr" oninput="clearErr()"><button type="button" class="eye" id="eyeBtn" onclick="togglePw()" aria-label="إظهار كلمة المرور">👁️</button></div>
+    <div class="err" id="loginErr" role="alert"></div>
+    <button class="btn" style="width:100%; background:var(--orange); color:#fff;">دخول 🚀</button>
+    <button type="button" id="forgot" class="forgot" onclick="resetLogin()">🆘 نسيت كلمة المرور؟ أرسل رابط التغيير لبريدي</button>
+  </form>
+</div></div>
+
+<!-- Modal: Install PWA -->
+<div class="ov" id="installM" onclick="if(event.target===this)closeAll()"><div class="mod">
+  <button class="x" onclick="closeAll()">✕</button><img class="inst-logo" id="instLogo" alt="الشعار">
+  <h3 style="text-align:center">📲 أضف TechnoLearn لشاشتك</h3><p class="d" style="text-align:center">يظهر الموقع بأيقونة الشعار بين تطبيقاتك ويفتح بنقرة واحدة.</p>
+  <div id="instBody"></div>
+</div></div>
+
+<!-- Modal: Emoji -->
+<div class="ov" id="emoM" style="z-index:70" onclick="if(event.target===this)this.classList.remove('on')"><div class="mod"><h3>😀 اختر رمز أو إيموجي</h3><p class="d">اضغط على أي رمز أو إيموجي لاستخدامه.</p><div class="egrid" id="egrid"></div></div></div>
+
+<!-- Dashboard Drawer -->
+<div id="dash">
+  <div class="dh"><img id="dhLogo" alt=""><h2>لوحة التحكم<small id="dhSub">TechnoLearn</small></h2><button onclick="closeDash()">👁️ الموقع</button><button class="out" onclick="logout()">🚪</button></div>
+  <div class="dbody"><nav class="dnav" id="dnav"></nav><main class="dmain"><div class="dc" id="dc"></div></main></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY='tl_data_v3';
+const FIREBASE_CONFIG={
+  apiKey: "AIzaSyBAyyKsdCv-dRUkZZbjdhDcuIIKCh7SLgw",
+  authDomain: "technolearn-f6b72.firebaseapp.com",
+  projectId: "technolearn-f6b72",
+  storageBucket: "technolearn-f6b72.firebasestorage.app",
+  messagingSenderId: "1058864564371",
+  appId: "1:1058864564371:web:418de73e710056a1b52566",
+  measurementId: "G-YTGV9G1K8Q"
+};
+const FB_ON=!!FIREBASE_CONFIG.projectId;
+let AUTH=null,DB=null,DOC=null,FBUSER=null,docExists,seeded=false;
+
+const ICONS={
+  wa:'<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/> <path d="M12 2C6.477 2 2 6.477 2 12c0 2.226.725 4.283 1.956 5.95L2 22l4.225-1.895C7.828 21.282 9.839 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.89 0-3.653-.526-5.163-1.44l-.37-.224-2.515 1.128 1.128-2.515-.224-.37C3.926 15.053 3.4 13.29 3.4 11.4 3.4 6.71 7.21 2.9 11.9 2.9c4.69 0 8.5 3.81 8.5 8.5 0 4.69-3.81 8.6-8.5 8.6z"/>',
+  ig:'<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>',
+  tg:'<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.07-.78 4.18-1.82 6.97-3.02 8.37-3.61 3.98-1.66 4.81-1.95 5.35-1.96.12 0 .38.03.55.17.14.12.18.28.2.4.02.1.02.21.01.32z"/>',
+  fb:'<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>'
+};
+
+const WARAQATI_INFO='منصة أسئلتي تساعدك على تصميم ورقة امتحانية احترافية خلال دقائق.\nماذا تقدّم لك الخدمة؟\n- اختيار المرحلة الدراسية والمادة والنموذج المناسب\n- كتابة الأسئلة بسهولة مع إضافة الصور والجداول والأشكال\n- التحكم بإعدادات الورقة وترتيبها كما تريد\n- تصدير الورقة بصيغة PDF أو صورة جاهزة للطباعة\nاضغط «فتح الخدمة» للبدء، وإن احتجت أي مساعدة تواصل مع فريق التطبيق.';
+const CV_SVC={icon:'📄',title:'إنشاء سيرة ذاتية',desc:'صمّم سيرة ذاتية احترافية متوافقة مع أنظمة ATS بسهولة.',info:'منشئ السيرة الذاتية يساعدك على إعداد سيرة ذاتية احترافية ومتوافقة مع أنظمة ATS التي تفحصها الشركات قبل المقابلة.\nماذا تقدّم لك الخدمة؟\n- ثلاثة قوالب جاهزة بتصاميم نظيفة وسهلة القراءة\n- إدخال بياناتك ومعاينة السيرة مباشرة أثناء الكتابة\n- دعم عدة لغات منها العربية والإنكليزية\n- تحميل السيرة بصيغة PDF جاهزة للإرسال\nاضغط «فتح الخدمة» للبدء، وإن احتجت أي مساعدة تواصل مع فريق التطبيق.',logo:'',linkType:'url',phone:'',phoneMode:'call',url:'waraqati-cv.html'};
+const DEF={
+ profile:{title:'TECHNOLEARN',tag:'منصة البحوث والمشاريع',logo:'no.jpg',sub:'منصة تقنية تقدم خدمات بحثية وتقارير علمية ومشاريع هندسية لجميع الأقسام.'},
+ settings:{wa:'9647862890657',footer:'جميع الحقوق محفوظة © 2026 TechnoLearn'},
+ social:{wa:'https://wa.me/9647862890657',ig:'https://instagram.com/technolearn.26?igsh=eHlyenV3aDBxZ2Jl',tg:'https://t.me/TechnoLearn892',fb:'https://www.facebook.com/people/Tecno-Learn/61595721892677/'},
+ banner:{title:'تواصل معنا واستكشف المزيد',desc:'انضم إلى منصة TechnoLearn والتحق بأحدث الكورسات والبرامج التعليمية المبتكرة.',btn:'🌍 تواصل معنا',url:'#'},
+ hideSections:{teachers:false,services:false,tools:false},
+ flags:{},
+ faqs:[
+  {q:'كيف أطلب خدمة من التطبيق؟',a:'اضغط على الخدمة التي تريدها من قسم «خدماتنا الأكاديمية»، ثم اضغط زر واتساب في أسفل صفحة الخدمة لإرسال طلبك لفريق التطبيق.'},
+  {q:'كم تستغرق مدة تنفيذ الطلب؟',a:'تختلف المدة حسب نوع الخدمة وحجمها، وتُحدَّد بعد مراجعة طلبك مع الفريق عبر واتساب.'},
+  {q:'ما طرق الدفع المتاحة؟',a:'تُحدَّد طرق الدفع وتكلفة الخدمة عند الاتفاق على الطلب مع الفريق عبر واتساب.'},
+  {q:'كيف أتواصل مع أحد الأساتذة؟',a:'من قسم «الأساتذة» اضغط على بطاقة الأستاذ ليفتح لك واتساب مباشرة للتواصل معه.'},
+  {q:'كيف أستخدم خدمة كتابة الأسئلة (أسئلتي)؟',a:'افتح خدمة «كتابة أسئلة» ثم اضغط «فتح الخدمة»، اختر المرحلة والمادة، اكتب أسئلتك، ثم صدّر الورقة PDF أو صورة.'},
+  {q:'لم أجد إجابة سؤالي، ماذا أفعل؟',a:'اضغط زر واتساب في أسفل هذه النافذة وسيجيبك فريق التطبيق بأسرع وقت.'}
+ ],
+ slides:[
+  {img:'no.jpg',title:'إنشاء بحث علمي',desc:'بحوث أكاديمية احترافية بمعايير الجامعات العالية',price:'يبدأ من 55,000 د.ع'},
+  {img:'no.jpg',title:'تقارير ومشاريع هندسية',desc:'إعداد التقارير والمشاريع لجميع الأقسام الأكاديمية والتقنية',price:'أسعار مناسبة وتنفيذ سريع'}
+ ],
+ teachers:[
+  {name:'أ. أحمد علي',spec:'هندسة البرمجيات والذكاء الاصطناعي',bio:'خبرة أكثر من 8 سنوات في الإشراف على مشاريع التخرج وتطوير الحلول التقنية.',img:'no.jpg'},
+  {name:'د. مريم العبيدي',spec:'العلوم الأكاديمية والترجمة',bio:'متخصصة في إعداد الأوراق العلمية والترجمة المعتمدة للبحوث والتقارير.',img:'no.jpg'}
+ ],
+ services:[
+  {icon:'📚',title:'البحوث الأكاديمية',desc:'إعداد بحوث علمية رصينة بمصادر موثوقة.',logo:'',linkType:'default'},
+  {icon:'📋',title:'التقارير العلمية',desc:'تقارير منظمة وجاهزة للتسليم.',logo:''},
+  {icon:'⚙️',title:'المشاريع الهندسية',desc:'مشاريع هندسية لجميع الأقسام.',logo:''},
+  {icon:'📑',title:'الترجمة المصدقة',desc:'ترجمة إنكليزية دقيقة ومصدّقة.',logo:''},
+  {icon:'📝',title:'كتابة أسئلة',desc:'صمّم أوراقك الامتحانية بسهولة عبر منصة أسئلتي.',info:WARAQATI_INFO,logo:'',linkType:'url',phone:'',phoneMode:'call',url:'waraqati.html'},
+  {...CV_SVC}
+ ],
+ tools:[
+  {icon:'📁',name:'Google Drive',desc:'تخزين سحابي مجاني بمساحة 15GB للملفات.',url:'https://drive.google.com',logo:''},
+  {icon:'🌐',name:'Netlify Host',desc:'استضافة مجانية وسريعة لمشاريع وتطبيقات الطلاب.',url:'https://netlify.com',logo:''},
+  {icon:'🎨',name:'Canva Education',desc:'تصميم العروض والبوسترات الأكاديمية.',url:'https://canva.com',logo:''},
+  {icon:'✍️',name:'QuillBot',desc:'إعادة صياغة النصوص والأبحاث مجاناً.',url:'https://quillbot.com',logo:''}
+ ]
+};
+
+const cl=o=>JSON.parse(JSON.stringify(o));
+let REMOTE=null;try{REMOTE=JSON.parse(localStorage.getItem('tl_remote')||'null')}catch(e){}
+function merge(d,s){if(s)for(const k in d){if(s[k]!==undefined)d[k]=Array.isArray(d[k])?s[k]:Object.assign(d[k],s[k])}return d}
+function load(){
+  const d=merge(cl(DEF),REMOTE);delete d.settings.user;delete d.settings.pass;
+  /* إضافة خدمة «كتابة أسئلة» (أسئلتي) مرة واحدة للبيانات المحفوظة سابقاً */
+  d.flags=d.flags||{};
+  if(!d.flags.waraqati){
+    d.flags.waraqati=true;
+    if(!d.services.some(x=>x.url==='waraqati.html'))d.services.push({icon:'📝',title:'كتابة أسئلة',desc:'صمّم أوراقك الامتحانية بسهولة عبر منصة أسئلتي.',info:WARAQATI_INFO,logo:'',linkType:'url',phone:'',phoneMode:'call',url:'waraqati.html'});
+  }
+  if(!d.flags.waraqatiInfo){
+    d.flags.waraqatiInfo=true;
+    d.services.forEach(x=>{if(x.url==='waraqati.html'&&!x.info)x.info=WARAQATI_INFO});
+  }
+  if(!d.flags.rename){
+    d.flags.rename=true;const r=v=>String(v||'').replace(/ورقتي/g,'أسئلتي');
+    d.services.forEach(x=>{x.title=r(x.title);x.desc=r(x.desc);x.info=r(x.info)});
+    (d.faqs||[]).forEach(f=>{f.q=r(f.q);f.a=r(f.a)});
+  }
+  if(!d.flags.cv){
+    d.flags.cv=true;
+    if(!d.services.some(x=>x.url==='waraqati-cv.html'))d.services.push({...CV_SVC});
+  }
+  return d;
+}
+let D=load();
+let saveT=null;
+
+const FS_MAX=1000000;      // حد Firestore للوثيقة ~1MB
+const IMG_LIMIT=900000;    // حد آمن عند رفع الصور (يترك مساحة للنصوص)
+function payload(){const o=cl(D);o.settings={wa:D.settings.wa,footer:D.settings.footer};return o}
+const dataSize=o=>new Blob([JSON.stringify(o)]).size;
+function saveRemote(){
+  clearTimeout(saveT);saveT=null;
+  if(!DOC||!FBUSER)return Promise.resolve();
+  const o=payload();
+  if(dataSize(o)>FS_MAX){toast('❌ حجم البيانات تجاوز حد القاعدة (1MB): احذف بعض الصور');return Promise.resolve()}
+  return DOC.set(o)
+    .then(()=>toast('☁️ تم الحفظ بنجاح في السحابة'))
+    .catch(err=>{
+      console.error('Firebase save error:',err);
+      const c=err&&err.code;
+      toast(c==='permission-denied'?'❌ فشل الحفظ: لا توجد صلاحية كتابة (راجع قواعد Firestore)'
+        :c==='unavailable'?'❌ لا يوجد اتصال بالإنترنت، تعذّر الحفظ'
+        :'❌ فشل الحفظ'+(c?': '+c:''));
+    });
+}
+function flushSave(){return saveT?saveRemote():Promise.resolve()}
+
+function persist(){renderSite();if(FB_ON&&FBUSER){clearTimeout(saveT);saveT=setTimeout(saveRemote,900)}}
+addEventListener('visibilitychange',()=>{if(document.hidden)flushSave()});
+addEventListener('pagehide',()=>{flushSave()});
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safe=u=>/^(https?:\/\/|tel:|mailto:)/i.test(u||'')?esc(u):'#';
+const $=id=>document.getElementById(id);
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2800)}
+const waLink=t=>'https://wa.me/'+String(D.settings.wa).replace(/\D/g,'')+(t?'?text='+encodeURIComponent(t):'');
+
+/* ===== Slider Auto Carousel ===== */
+let slideIndex=0, slideTimer=null;
+function initSlider(){
+  const track=$('sliderTrack'), dots=$('sliderDots');
+  const slides=D.slides||[];
+  if(!slides.length){
+    track.innerHTML='<div class="slide"><div class="slide-overlay"><div class="slide-title">TechnoLearn</div></div></div>';
+    dots.innerHTML='';
+    return;
+  }
+  track.innerHTML=slides.map(s=>`
+    <div class="slide">
+      <img src="${s.img||'no.jpg'}" alt="${esc(s.title)}">
+      <div class="slide-overlay">
+        ${s.title?`<div class="slide-title">${esc(s.title)}</div>`:''}
+        ${s.desc?`<div class="slide-desc">${esc(s.desc)}</div>`:''}
+        ${s.price?`<div class="slide-price">${esc(s.price)}</div>`:''}
+      </div>
+    </div>
+  `).join('');
+  
+  dots.innerHTML=slides.map((_,i)=>`<div class="dot ${i===0?'active':''}" onclick="goToSlide(${i})"></div>`).join('');
+  slideIndex=0;
+  startSlideShow();
+}
+
+function goToSlide(i){
+  const slides=D.slides||[];
+  if(!slides.length) return;
+  slideIndex=(i+slides.length)%slides.length;
+  const track=$('sliderTrack');
+  track.style.transform=`translateX(${slideIndex*100}%)`;
+  const allDots=document.querySelectorAll('.dot');
+  allDots.forEach((d,idx)=>d.classList.toggle('active',idx===slideIndex));
+}
+
+function startSlideShow(){
+  clearInterval(slideTimer);
+  slideTimer=setInterval(()=>{
+    goToSlide(slideIndex+1);
+  },4000);
+}
+
+/* ===== Site Renderer ===== */
+function renderSite(){
+ const p=D.profile;
+ $('brand').textContent=p.title;
+ $('subTag').textContent=p.tag;
+ $('logoImg').src=p.logo||'no.jpg';
+ $('dhLogo').src=p.logo||'no.jpg';$('cLogo').src=p.logo||'no.jpg';renderFaq();
+ $('instLogo').src=p.logo||'no.jpg';try{setAppIcon(p.logo||'no.jpg')}catch(e){}
+ document.title=p.title+' | '+p.tag;
+ 
+ const cls={wa:'s-wa',ig:'s-ig',tg:'s-tg',fb:'s-fb'},nm={wa:'واتساب',ig:'انستغرام',tg:'تليغرام',fb:'فيسبوك'};
+ $('cardSocials').innerHTML=Object.keys(cls).filter(k=>D.social[k]).map(k=>`<a class="c-soc ${cls[k]}" href="${safe(D.social[k])}" target="_blank" rel="noopener" aria-label="${nm[k]}"><svg viewBox="0 0 24 24">${ICONS[k]}</svg></a>`).join('');
+
+ initSlider();
+
+ const hide = D.hideSections || {};
+ $('secTeachers').classList.toggle('hidden-sec', !!hide.teachers);
+ $('secServices').classList.toggle('hidden-sec', !!hide.services);
+ $('secTools').classList.toggle('hidden-sec', !!hide.tools);
+
+ const tList = D.teachers || [];
+ $('teachersScroll').innerHTML=tList.map(t=>`
+   <div class="prof-card" onclick="window.open('${waLink('مرحباً أستاذ '+t.name+'، أرغب بالاستفسار والتواصل معك.')}','_blank')">
+     <img class="prof-img" src="${t.img||'no.jpg'}" alt="${esc(t.name)}">
+     <div class="prof-name">${esc(t.name)}</div>
+     <div class="prof-spec">${esc(t.spec)}</div>
+     <div class="prof-bio">${esc(t.bio)}</div>
+   </div>
+ `).join('')||'<div class="empty">لا يوجد أساتذة مضافون بعد</div>';
+
+ $('svcGrid').innerHTML=D.services.map((s,i)=>`
+   <a class="card svc" href="#service" onclick="openSvc(${i});return false">
+     <div class="emo">${s.logo ? `<img src="${s.logo}" alt="">` : esc(s.icon||'🎓')}</div>
+     <b>${esc(s.title)}</b>
+     <p>${esc(s.desc)}</p>
+   </a>
+ `).join('')||'<div class="empty">لا توجد خدمات بعد</div>';
+ 
+ $('toolGrid').innerHTML=D.tools.map(t=>`
+   <a class="card tool" target="_blank" rel="noopener" href="${safe(t.url)}">
+     <div class="emo">${t.logo ? `<img src="${t.logo}" alt="">` : esc(t.icon||'💡')}</div>
+     <b>${esc(t.name)}</b>
+     <p>${esc(t.desc)}</p>
+     <em>زيارة الموقع ↗</em>
+   </a>
+ `).join('')||'<div class="empty">لا توجد أدوات بعد</div>';
+ 
+ const b=D.banner;$('bnT').textContent=b.title;$('bnD').textContent=b.desc;$('bnB').textContent=b.btn;$('bnB').href=safe(b.url);
+ $('foot').innerHTML=esc(D.settings.footer);
+}
+
+/* ===== صفحة معلومات الخدمة ===== */
+function openSvc(i){
+  const s=D.services[i];if(!s)return;
+  const h=svcHref(s),custom=h!==svcHref({title:s.title}),ext=/^https?:/i.test(h);
+  const info=String(s.info||'').trim()||String(s.desc||'').trim();
+  let body='',ul=false;
+  info.split(/\n+/).map(x=>x.trim()).filter(Boolean).forEach(x=>{
+    const li=/^[-•*]\s*/.test(x);
+    if(li&&!ul){body+='<ul>';ul=true}
+    if(!li&&ul){body+='</ul>';ul=false}
+    body+=li?'<li>'+esc(x.replace(/^[-•*]\s*/,''))+'</li>':'<p>'+esc(x)+'</p>';
+  });
+  if(ul)body+='</ul>';
+  let main='';
+  if(custom){
+    const label=s.linkType==='url'?'🚀 فتح الخدمة':(s.phoneMode==='wa'?'💬 مراسلة عبر واتساب':'📞 اتصال مباشر');
+    main=`<a class="sp-btn main" href="${h}" ${ext?'target="_blank" rel="noopener"':''}>${label}</a>`;
+  }
+  const wa=waLink('مرحباً فريق '+(D.profile.title||'')+'، أرغب بالاستفسار عن خدمة: '+(s.title||''));
+  $('spBody').innerHTML=`
+    <div class="sp-hero"><div class="emo">${s.logo?`<img src="${s.logo}" alt="">`:esc(s.icon||'🎓')}</div><h2>${esc(s.title)}</h2><p>${esc(s.desc)}</p></div>
+    <div class="sp-card"><h4>📋 معلومات الخدمة</h4>${body||'<p>لا توجد تفاصيل بعد.</p>'}</div>
+    <div class="sp-acts">${main}<a class="sp-btn wa" href="${wa}" target="_blank" rel="noopener">💬 تواصل مع فريق التطبيق عبر واتساب</a></div>
+    <p class="sp-note">للطلب أو الاستفسار عن هذه الخدمة تواصل معنا مباشرة.</p>`;
+  $('svcPage').classList.add('on');$('spBody').scrollTop=0;
+  try{history.pushState({svc:1},'')}catch(e){}
+}
+function closeSvc(fromPop){
+  $('svcPage').classList.remove('on');
+  if(!fromPop&&history.state&&history.state.svc){try{history.back()}catch(e){}}
+}
+addEventListener('popstate',()=>{if($('svcPage').classList.contains('on'))closeSvc(true)});
+
+/* ===== الزر العائم: الأسئلة المتكررة ===== */
+/* AI_HOOK: لاحقاً عند ربط أداة الذكاء الاصطناعي، أضف حقل سؤال في #chat واستدعِ الأداة من هنا بدل البحث في الأسئلة */
+var faqOpen=-1;
+function renderFaq(){
+  const list=$('faqList');if(!list)return;
+  const raw=$('faqQ').value.trim(),q=raw.toLowerCase();
+  const items=(D.faqs||[]).map((f,i)=>({f,i})).filter(({f})=>!q||((f.q||'')+' '+(f.a||'')).toLowerCase().includes(q));
+  list.innerHTML=items.length?items.map(({f,i})=>`<div class="fq-item ${faqOpen===i?'open':''}"><button type="button" class="fq-q" onclick="toggleFaqItem(${i})"><span>${esc(f.q)}</span><i>▾</i></button><div class="fq-a">${esc(f.a)}</div></div>`).join(''):`<div class="fq-empty">${q?'لا توجد نتيجة مطابقة 🔍':'لا توجد أسئلة بعد'}</div>`;
+  $('faqWa').href=waLink('مرحباً فريق '+(D.profile.title||'')+'، لدي سؤال'+(raw?': '+raw:'.'));
+}
+function toggleFaqItem(i){faqOpen=faqOpen===i?-1:i;renderFaq()}
+function toggleChat(force){
+  const c=$('chat'),on=force===undefined?!c.classList.contains('on'):!!force;
+  c.classList.toggle('on',on);$('fab').classList.toggle('open',on);$('fab').textContent=on?'✕':'❓';
+  if(on)renderFaq();
+}
+
+/* ===== Auth & Modals ===== */
+function closeAll(){['loginM','emoM','installM'].forEach(i=>$(i).classList.remove('on'))}
+function openLogin(){if(FB_ON&&FBUSER){closeAll();openDash();return}closeAll();clearErr();$('forgot').classList.remove('on');$('loginM').classList.add('on');setTimeout(()=>$('lu').focus(),150)}
+let fails=0;
+const norm=v=>String(v||'').replace(/[\u200e\u200f\u202a-\u202e\u200b\ufeff]/g,'').replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).trim();
+function resetLogin(){const m=FBUSER?FBUSER.email:norm($('lu').value);if(!m)return toast('أدخل بريدك الإلكتروني أولاً');if(!AUTH)return;AUTH.sendPasswordResetEmail(m).then(()=>toast('✉️ تم إرسال رابط تغيير كلمة المرور')).catch(()=>toast('❌ تعذّر الإرسال، تحقق من البريد'))}
+function logout(){flushSave().finally(()=>{AUTH&&AUTH.signOut()});closeDash();toast('تم تسجيل الخروج')}
+function togglePw(){const i=$('lp'),show=i.type==='password';i.type=show?'text':'password';$('eyeBtn').textContent=show?'🙈':'👁️';$('eyeBtn').setAttribute('aria-label',show?'إخفاء كلمة المرور':'إظهار كلمة المرور')}
+function clearErr(){$('loginErr').classList.remove('on');$('lu').classList.remove('bad');$('lp').classList.remove('bad')}
+function showErr(msg,fields){const e=$('loginErr');e.textContent=msg;e.classList.add('on');fields.forEach(f=>f.classList.add('bad'));const m=document.querySelector('#loginM .mod');m.classList.remove('shake');void m.offsetWidth;m.classList.add('shake');(fields[0]||$('lu')).focus()}
+
+function doLogin(e){
+ e.preventDefault();clearErr();
+ const u=norm($('lu').value),p=norm($('lp').value);
+ if(!FB_ON)return showErr('⚠️ لوحة التحكم غير مفعّلة بعد: أضف إعدادات Firebase داخل الكود.',[]);
+ if(!u&&!p)return showErr('⚠️ أدخل البريد الإلكتروني وكلمة المرور.',[$('lu'),$('lp')]);
+ if(!u)return showErr('⚠️ أدخل البريد الإلكتروني.',[$('lu')]);
+ if(!p)return showErr('⚠️ أدخل كلمة المرور.',[$('lp')]);
+ if(!AUTH)return showErr('⏳ جارٍ الاتصال... أعد المحاولة بعد لحظة.',[]);
+ AUTH.signInWithEmailAndPassword(u,p).then(()=>{fails=0;closeAll();$('lp').value='';$('lp').type='password';$('eyeBtn').textContent='👁️';openDash()}).catch(()=>{fails++;$('forgot').classList.add('on');showErr('❌ البريد الإلكتروني أو كلمة المرور غير صحيحة. (المحاولة '+fails+')',[$('lu'),$('lp')])});
+}
+
+/* ===== Dashboard Control Panel ===== */
+const TABS=[['home','📊','الرئيسية'],['profile','🎨','الموقع'],['slides','🖼️','السلايدر'],['teachers','👨‍🏫','الأساتذة'],['services','🎓','الخدمات'],['tools','🧰','الأدوات'],['faqs','❓','الأسئلة'],['settings','⚙️','الإعدادات']];
+
+const HUGE_EMOJIS='📚 📋 ⚙️ 📑 🎓 💻 🚀 💡 📁 🌐 🎨 ✍️ 📝 📊 ⚡ 🔥 🎯 🧠 🔍 🛠️ ⭐ 💎 🏆 📱 🔔 🎁 📢 🧪 🔬 📐 🏗️ 🧮 📖 🖥️ 🤖 🌍 🗂️ 🎬 📷 🎧 💬 ✅ 🆕 🔒 💰 🕒 🧾 🖊️ 🏅 🏫 🎒 🔬 🔭 🧲 🧬 💊 💉 🩺 🏥 📐 📏 📌 📍 📎 ✂️ ✒️ 🖌️ 🖍️ 📝 📈 📉 📊 📋 📅 📆 📇 📁 📂 🗂️ 🗃️ 🗄️ 🪧 🪪 🔑 🗝️ 🔨 ⛏️ ⚒️ 🛠️ 🪛 🪚 🔩 ⚙️ 🧱 ⛓️ 🧲 🚁 ✈️ 🚀 🛸 🛰️ ⛵ 🚢 ⚓ ⛽ 🚧 🛑 🚥 🚦 ⏱️ ⏲️ ⏰ 🕰️ ⌛ ⏳ 📡 🔋 🔌 💻 🖥️ 🖨️ ⌨️ 🖱️ 🖲️ 💽 💾 💿 📀 🧮 🎥 🎞️ 📽️ 📺 📷 📸 📹 📼 🔍 🔎 🕯️ 💡 🔦 🏮 🪔 📔 📕 📖 📗 📘 📙 📚 📓 📒 📃 📜 📄 📰 🗞️ 📑 🔖'.split(' ');
+
+let tab='home',emoCb=null;
+function openDash(){$('dash').classList.add('on');$('dhSub').textContent=D.profile.title;go(tab)}
+function closeDash(){flushSave();$('dash').classList.remove('on')}
+function go(t){tab=t;$('dnav').innerHTML=TABS.map(x=>`<button class="${x[0]===t?'on':''}" onclick="go('${x[0]}')"><span>${x[1]}</span>${x[2]}</button>`).join('');$('dc').innerHTML=VIEWS[t]();$('dc').parentElement.scrollTop=0}
+const A=s=>esc(s);
+function set(o,k,v){D[o][k]=v;persist()}
+function upd(l,i,k,v){
+  D[l][i][k]=v;
+  persist();
+}
+function del(l,i){if(confirm('حذف هذا العنصر؟')){D[l].splice(i,1);persist();go(tab)}}
+function mv(l,i,d){const j=i+d;if(j<0||j>=D[l].length)return;[D[l][i],D[l][j]]=[D[l][j],D[l][i]];persist();go(tab)}
+function addItem(l){D[l].push(cl(NEW[l]));persist();go(tab);toast('➕ تمت الإضافة')}
+function pickEmoji(cb){emoCb=cb;$('emoM').classList.add('on')}
+function setIcon(l,i){pickEmoji(e=>{D[l][i].icon=e;D[l][i].logo='';persist();go(tab)})}
+
+$('egrid').innerHTML=HUGE_EMOJIS.map(e=>`<button type="button" onclick="emoCb&&emoCb('${e}');$('emoM').classList.remove('on')">${e}</button>`).join('');
+
+const NEW={
+  slides:{img:'no.jpg',title:'عنوان البنر',desc:'وصف مختصر للبنر',price:'السعر أو الملاحظة'},
+  teachers:{name:'أستاذ جديد',spec:'التخصص',bio:'نبذة عن الأستاذ',img:'no.jpg'},
+  services:{icon:'🧩',title:'خدمة جديدة',desc:'وصف الخدمة',info:'',logo:'',linkType:'default',phone:'',phoneMode:'call',url:''},
+  tools:{icon:'💡',name:'أداة جديدة',desc:'وصف الأداة',url:'https://',logo:''},
+  faqs:{q:'سؤال جديد؟',a:'اكتب الإجابة هنا.'}
+};
+
+
+
+function editorTools(){
+  let l='tools';
+  return `<div class="panel"><h4>🧰 الأدوات والمواقع المفيدة</h4><div class="hint">يمكنك اختيار سمايل/رمز أو رفع صورة وشعار خاص لكل أداة وموقع مفيد.</div></div>`+
+  D[l].map((it,i)=>`<div class="panel">
+    <div class="ei-top">
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="emo-btn" type="button" onclick="setIcon('${l}',${i})">${it.logo?`<img src="${it.logo}" alt="">`:esc(it.icon||'💡')}</button>
+        <div>
+          <button class="bl" type="button" style="padding:6px 10px;border-radius:8px;font-size:12px;font-weight:700" onclick="$('tLogo_${i}').click()">📤 رفع صورة / لوكو</button>
+          ${it.logo?`<button class="no" type="button" style="padding:6px 10px;border-radius:8px;font-size:12px;font-weight:700;margin-top:4px" onclick="D.tools[${i}].logo='';persist();go('tools')">حذف الصورة</button>`:''}
+          <input type="file" id="tLogo_${i}" accept="image/*" hidden onchange="upToolLogo(this.files[0],${i});this.value=''">
+        </div>
+      </div>
+      <div class="ei-act"><button type="button" onclick="mv('${l}',${i},-1)">▲</button><button type="button" onclick="mv('${l}',${i},1)">▼</button><button type="button" class="del" onclick="del('${l}',${i})">🗑️</button></div>
+    </div>
+    <label>اسم الأداة / الموقع</label><input value="${A(it.name)}" oninput="upd('${l}',${i},'name',this.value)">
+    <label>الوصف</label><textarea oninput="upd('${l}',${i},'desc',this.value)">${A(it.desc)}</textarea>
+    <label>الرابط</label><input type="url" dir="ltr" value="${A(it.url)}" oninput="upd('${l}',${i},'url',this.value)">
+  </div>`).join('')+`<button class="add" type="button" onclick="addItem('${l}')">➕ إضافة موقع/أداة جديدة</button>`;
+}
+
+/* ===== ربط الخدمات: واتساب المنصة / رقم هاتف / رابط ===== */
+function intlDigits(v){
+  let d=norm(v).replace(/\D/g,'');
+  if(d.startsWith('00'))d=d.slice(2);
+  else if(d.startsWith('0'))d='964'+d.slice(1);   // رقم عراقي محلي -> صيغة دولية
+  return d;
+}
+function svcHref(s){
+  const t=s.linkType||'default',msg='مرحباً، أرغب بالاستفسار عن: '+(s.title||'');
+  if(t==='phone'&&String(s.phone||'').trim()){
+    const n=intlDigits(s.phone);
+    if(n.length>=8)return s.phoneMode==='wa'?'https://wa.me/'+n+'?text='+encodeURIComponent(msg):'tel:+'+n;
+  }
+  if(t==='url'&&String(s.url||'').trim()){
+    let u=String(s.url).trim();
+    if(/^(\.{0,2}\/)?[\w\-\/]+\.html?(\?[^\s]*)?(#\S*)?$/i.test(u))return esc(u);   /* صفحة داخلية: تُفتح في نفس النافذة */
+    if(!/^[a-z][a-z0-9+.-]*:/i.test(u))u='https://'+u;
+    return safe(u);
+  }
+  return waLink(msg);
+}
+function svcLink(i,v){
+  D.services[i].linkType=v;
+  const p=$('slp_'+i),u=$('slu_'+i);
+  if(p)p.style.display=v==='phone'?'block':'none';
+  if(u)u.style.display=v==='url'?'block':'none';
+  persist();
+}
+
+function editorServices(){
+  let l='services';
+  return `<div class="panel"><h4>🎓 أقسام الخدمات</h4><div class="hint">اختر سمايل أو ارفع شعاراً لكل خدمة، واكتب معلومات الخدمة التي تظهر في صفحتها. وفي أسفل الصفحة زر واتساب للتواصل مع الفريق، ويمكنك إضافة زر آخر: رقم هاتف (اتصال أو واتساب) أو رابط. الأرقام التي تبدأ بـ 07 تُحوَّل تلقائياً للصيغة الدولية +964.</div></div>`+
+  D[l].map((it,i)=>{const lt=it.linkType||'default';return `<div class="panel">
+    <div class="ei-top">
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="emo-btn" type="button" onclick="setIcon('${l}',${i})">${it.logo?`<img src="${it.logo}" alt="">`:esc(it.icon||'🎓')}</button>
+        <div>
+          <button class="bl" type="button" style="padding:6px 10px;border-radius:8px;font-size:12px;font-weight:700" onclick="$('sLogo_${i}').click()">📤 رفع لوكو</button>
+          ${it.logo?`<button class="no" type="button" style="padding:6px 10px;border-radius:8px;font-size:12px;font-weight:700;margin-top:4px" onclick="D.services[${i}].logo='';persist();go('services')">حذف اللوكو</button>`:''}
+          <input type="file" id="sLogo_${i}" accept="image/*" hidden onchange="upSvcLogo(this.files[0],${i});this.value=''">
+        </div>
+      </div>
+      <div class="ei-act"><button type="button" onclick="mv('${l}',${i},-1)">▲</button><button type="button" onclick="mv('${l}',${i},1)">▼</button><button type="button" class="del" onclick="del('${l}',${i})">🗑️</button></div>
+    </div>
+    <label>اسم الخدمة</label><input value="${A(it.title)}" oninput="upd('${l}',${i},'title',this.value)">
+    <label>الوصف المختصر (يظهر على بطاقة الخدمة)</label><textarea oninput="upd('${l}',${i},'desc',this.value)">${A(it.desc)}</textarea>
+    <label>📄 معلومات الخدمة (تظهر في صفحة الخدمة عند الضغط)</label><textarea style="min-height:130px" placeholder="اكتب تفاصيل الخدمة. ابدأ السطر بـ - ليظهر كنقطة في قائمة." oninput="upd('${l}',${i},'info',this.value)">${A(it.info||'')}</textarea>
+    <div class="linkbox">
+      <label>🔗 زر الإجراء في صفحة الخدمة (يُضاف فوق زر واتساب الفريق)</label>
+      <select onchange="svcLink(${i},this.value)">
+        <option value="default" ${lt==='default'?'selected':''}>💬 بدون زر إضافي (واتساب الفريق فقط)</option>
+        <option value="phone" ${lt==='phone'?'selected':''}>📞 رقم هاتف</option>
+        <option value="url" ${lt==='url'?'selected':''}>🌐 رابط</option>
+      </select>
+      <div id="slp_${i}" style="display:${lt==='phone'?'block':'none'}">
+        <label>رقم الهاتف</label><input type="tel" dir="ltr" placeholder="07xxxxxxxxx أو +9647xxxxxxxxx" value="${A(it.phone||'')}" oninput="upd('${l}',${i},'phone',this.value)">
+        <label>طريقة التواصل</label>
+        <select onchange="upd('${l}',${i},'phoneMode',this.value)">
+          <option value="call" ${(it.phoneMode||'call')==='call'?'selected':''}>📞 اتصال مباشر</option>
+          <option value="wa" ${it.phoneMode==='wa'?'selected':''}>💬 مراسلة عبر واتساب</option>
+        </select>
+      </div>
+      <div id="slu_${i}" style="display:${lt==='url'?'block':'none'}">
+        <label>الرابط</label><input type="url" dir="ltr" placeholder="https://example.com" value="${A(it.url||'')}" oninput="upd('${l}',${i},'url',this.value)">
+      </div>
+    </div>
+  </div>`}).join('')+`<button class="add" type="button" onclick="addItem('${l}')">➕ إضافة خدمة جديدة</button>`;
+}
+
+function fld(o,k,lbl,type){const v=D[o][k]??'';return `<label>${lbl}</label>`+(type==='ta'?`<textarea oninput="set('${o}','${k}',this.value)">${A(v)}</textarea>`:`<input ${type==='url'?'type="url" dir="ltr"':''} value="${A(v)}" oninput="set('${o}','${k}',this.value)">`)}
+
+
+
+const VIEWS={
+ home:()=>`<div class="stats">${[['🖼️',(D.slides||[]).length,'بنر'],['👨‍🏫',(D.teachers||[]).length,'أستاذ'],['🎓',D.services.length,'خدمة']].map(s=>`<div class="panel stat"><div class="e">${s[0]}</div><b>${s[1]}</b><small>${s[2]}</small></div>`).join('')}</div>
+  ${storageMeter()}<div class="panel"><h4>⚡ إجراءات سريعة</h4><div class="row2"><button class="bl" onclick="go('slides')">🖼️ البنرات والسلايدر</button><button class="bl" onclick="go('teachers')">👨‍🏫 الأساتذة</button></div><div class="row2"><button class="bl" onclick="go('services')">🎓 الخدمات</button><button class="bl" onclick="go('profile')">🎨 تعديل الموقع</button></div></div>
+  <div class="panel"><h4>👁️ إخفاء / إظهار الأقسام</h4>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" ${D.hideSections?.teachers?'checked':''} onchange="D.hideSections=D.hideSections||{};D.hideSections.teachers=this.checked;persist();toast('✅ تم التحديث')"> إخفاء قسم كادر الأساتذة</label>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" ${D.hideSections?.services?'checked':''} onchange="D.hideSections=D.hideSections||{};D.hideSections.services=this.checked;persist();toast('✅ تم التحديث')"> إخفاء قسم الخدمات الأكاديمية</label>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" ${D.hideSections?.tools?'checked':''} onchange="D.hideSections=D.hideSections||{};D.hideSections.tools=this.checked;persist();toast('✅ تم التحديث')"> إخفاء قسم الأدوات والاستضافات</label>
+    </div>
+  </div>
+  <div class="hint">☁️ كل تعديل يُحفظ تلقائياً في السحابة ويظهر لجميع الزوار فوراً.</div>`,
+ profile:()=>`<div class="panel"><h4>🖼️ الشعار</h4><div class="upl"><img src="${A(D.profile.logo)}" id="lgPrev" alt=""><div style="flex:1"><button class="add" type="button" onclick="$('lgFile').click()">📤 رفع شعار جديد</button><input type="file" id="lgFile" accept="image/*" hidden onchange="upLogo(this.files[0]);this.value=''"></div></div></div>
+  <div class="panel"><h4>✏️ النصوص الرئيسية</h4>${fld('profile','title','اسم المنصة')}${fld('profile','tag','الوصف العلوي الفرعي')}</div>
+  <div class="panel"><h4>🔗 روابط التواصل</h4>${fld('social','wa','💬 واتساب','url')}${fld('social','ig','📸 انستغرام','url')}${fld('social','tg','✈️ تليغرام','url')}${fld('social','fb','👍 فيسبوك','url')}</div>
+  <div class="panel"><h4>🌐 البانر السفلي</h4>${fld('banner','title','العنوان')}${fld('banner','desc','الوصف','ta')}${fld('banner','btn','نص الزر')}${fld('banner','url','رابط الزر','url')}</div>
+  <div class="panel"><h4>📄 التذييل</h4>${fld('settings','footer','نص الحقوق')}</div>`,
+ slides:()=>`<div class="panel"><h4>🖼️ سلايدر البنرات المتحركة</h4><div class="hint">هذه الصور تنتقل تلقائياً في الواجهة الرئيسية.</div></div>`+(D.slides||[]).map((s,i)=>`<div class="panel">
+   <div class="ei-top">
+     <div class="upl" style="margin:0"><img src="${A(s.img||'no.jpg')}" alt=""><button class="bl" type="button" style="padding:8px 12px;border-radius:10px;font-weight:700" onclick="$('sImg_${i}').click()">تغيير الصورة</button><input type="file" id="sImg_${i}" accept="image/*" hidden onchange="upSlideImg(this.files[0],${i});this.value=''"></div>
+     <div class="ei-act"><button type="button" onclick="mv('slides',${i},-1)">▲</button><button type="button" onclick="mv('slides',${i},1)">▼</button><button type="button" class="del" onclick="del('slides',${i})">🗑️</button></div>
+   </div>
+   <label>عنوان البنر</label><input value="${A(s.title)}" oninput="upd('slides',${i},'title',this.value)">
+   <label>الوصف</label><textarea oninput="upd('slides',${i},'desc',this.value)">${A(s.desc)}</textarea>
+   <label>الشارة السفلية</label><input value="${A(s.price)}" oninput="upd('slides',${i},'price',this.value)">
+ </div>`).join('')+`<button class="add" type="button" onclick="addItem('slides')">➕ إضافة بنر جديد</button>`,
+ teachers:()=>`<div class="panel"><h4>👨‍🏫 كادر الأساتذة</h4><div class="hint">عند الضغط على أي أستاذ في الموقع، سيتم تحويل الزائر للواتساب للتواصل معه مباشرة.</div></div>`+(D.teachers||[]).map((t,i)=>`<div class="panel">
+   <div class="ei-top">
+     <div class="upl" style="margin:0"><img src="${A(t.img||'no.jpg')}" alt=""><button class="bl" type="button" style="padding:8px 12px;border-radius:10px;font-weight:700" onclick="$('tImg_${i}').click()">تغيير الصورة</button><input type="file" id="tImg_${i}" accept="image/*" hidden onchange="upTeacherImg(this.files[0],${i});this.value=''"></div>
+     <div class="ei-act"><button type="button" onclick="mv('teachers',${i},-1)">▲</button><button type="button" onclick="mv('teachers',${i},1)">▼</button><button type="button" class="del" onclick="del('teachers',${i})">🗑️</button></div>
+   </div>
+   <label>الاسم</label><input value="${A(t.name)}" oninput="upd('teachers',${i},'name',this.value)">
+   <label>التخصص</label><input value="${A(t.spec)}" oninput="upd('teachers',${i},'spec',this.value)">
+   <label>نبذة عن الأستاذ</label><textarea oninput="upd('teachers',${i},'bio',this.value)">${A(t.bio)}</textarea>
+ </div>`).join('')+`<button class="add" type="button" onclick="addItem('teachers')">➕ إضافة أستاذ جديد</button>`,
+ services:()=>editorServices(),
+ tools:()=>editorTools(),
+ faqs:()=>{D.faqs=D.faqs||[];return `<div class="panel"><h4>❓ الأسئلة المتكررة</h4><div class="hint">تظهر للمستخدم عند الضغط على الزر العائم ❓ في الموقع، ويمكنه البحث فيها.</div></div>`+D.faqs.map((f,i)=>`<div class="panel"><div class="ei-top"><b>سؤال ${i+1}</b><div class="ei-act"><button type="button" onclick="mv('faqs',${i},-1)">▲</button><button type="button" onclick="mv('faqs',${i},1)">▼</button><button type="button" class="del" onclick="del('faqs',${i})">🗑️</button></div></div><label>السؤال</label><input value="${A(f.q)}" oninput="upd('faqs',${i},'q',this.value)"><label>الإجابة</label><textarea style="min-height:100px" oninput="upd('faqs',${i},'a',this.value)">${A(f.a)}</textarea></div>`).join('')+`<button class="add" type="button" onclick="addItem('faqs')">➕ إضافة سؤال جديد</button>`},
+ settings:()=>`<div class="panel"><h4>🔐 حساب المشرف</h4><div class="hint">بيانات الدخول محفوظة في Firebase.</div><p dir="ltr" style="text-align:left;margin-bottom:10px;font-weight:700">${esc(FBUSER?FBUSER.email:'')}</p><div class="row2"><button class="bl" type="button" onclick="resetLogin()">✉️ رابط تغيير كلمة المرور</button><button class="no" type="button" onclick="logout()">🚪 خروج</button></div></div>
+  <div class="panel"><h4>💬 رقم واتساب للطلبات</h4>${fld('settings','wa','الرقم مع رمز الدولة (بدون +)')}</div>
+  <div class="panel"><h4>💾 النسخ الاحتياطي</h4><div class="row2"><button class="bl" type="button" onclick="exportD()">⬇️ نسخة كاملة</button><button class="bl" type="button" onclick="$('impF').click()">⬆️ استيراد</button></div><input type="file" id="impF" accept=".json" hidden onchange="importD(this.files[0])"><div class="row2"><button class="no" type="button" onclick="resetD()">♻️ استعادة الإعدادات الافتراضية</button></div></div>`
+};
+
+/* ===== محرك الصور: تصغير وضغط تلقائي ليناسب حد الرفع ===== */
+function loadImage(file){
+  return new Promise((ok,no)=>{
+    const url=URL.createObjectURL(file),im=new Image();
+    im.onload=()=>{URL.revokeObjectURL(url);ok(im)};
+    im.onerror=()=>{URL.revokeObjectURL(url);no(new Error('load'))};
+    im.src=url;
+  });
+}
+async function compressImage(file,{maxDim=700,maxBytes=90000,alpha=false}={}){
+  const im=await loadImage(file),w0=im.naturalWidth,h0=im.naturalHeight;
+  if(!w0||!h0)throw new Error('empty');
+  let dim=maxDim,best=null;
+  for(let round=0;round<8;round++){
+    const k=Math.min(1,dim/Math.max(w0,h0)),c=document.createElement('canvas');
+    c.width=Math.max(1,Math.round(w0*k));c.height=Math.max(1,Math.round(h0*k));
+    const g=c.getContext('2d');
+    if(!alpha){g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height)}
+    g.drawImage(im,0,0,c.width,c.height);
+    let mime=alpha?'image/webp':'image/jpeg';
+    for(let q=.85;q>=.4;q-=.15){
+      let u=c.toDataURL(mime,q);
+      if(alpha&&mime==='image/webp'&&!u.startsWith('data:image/webp')){mime='image/png';u=c.toDataURL('image/png')}
+      best=u;
+      if(u.length<=maxBytes)return u;
+      if(mime==='image/png')break;
+    }
+    dim=Math.round(dim*.8);
+  }
+  return best;
+}
+async function applyImage(file,{opts,get,setv,after,okMsg}){
+  if(!file)return;
+  toast('⏳ جارٍ تصغير الصورة...');
+  let old=get(),done=false,kb=0;
+  try{
+    for(const f of [1,.5,.25]){
+      const u=await compressImage(file,{...opts,maxBytes:opts.maxBytes*f,maxDim:Math.round(opts.maxDim*(f===1?1:Math.sqrt(f)))});
+      setv(u);
+      if(dataSize(payload())<=IMG_LIMIT){done=true;kb=Math.round(u.length/1024);break}
+    }
+  }catch(e){setv(old);return toast('❌ تعذّر قراءة الصورة، جرّب صورة بصيغة JPG أو PNG')}
+  if(!done){setv(old);return toast('❌ مساحة التخزين ممتلئة: احذف بعض الصور القديمة ثم أعد المحاولة')}
+  persist();after();toast(okMsg+' ('+kb+' KB)');
+}
+function storageMeter(){
+  const s=dataSize(payload()),p=Math.min(100,Math.round(s/1048576*100)),col=p>85?'#dc2626':p>65?'#f59e0b':'#16a34a';
+  return `<div class="panel"><h4>💾 مساحة التخزين السحابي</h4><div style="height:10px;background:var(--line);border-radius:99px;overflow:hidden"><div style="width:${p}%;height:100%;background:${col}"></div></div><small style="color:var(--muted);font-weight:700;display:block;margin-top:6px">${Math.round(s/1024)} KB من 1024 KB (${p}%) — الصور تُصغَّر وتُضغط تلقائياً لتناسب الرفع.</small></div>`;
+}
+
+function upToolLogo(f,i){applyImage(f,{opts:{maxDim:250,maxBytes:25000,alpha:true},get:()=>D.tools[i].logo,setv:v=>D.tools[i].logo=v,after:()=>go('tools'),okMsg:'✅ تم رفع صورة الأداة'})}
+function upSvcLogo(f,i){applyImage(f,{opts:{maxDim:250,maxBytes:25000,alpha:true},get:()=>D.services[i].logo,setv:v=>D.services[i].logo=v,after:()=>go('services'),okMsg:'✅ تم رفع شعار الخدمة'})}
+function upSlideImg(f,i){applyImage(f,{opts:{maxDim:800,maxBytes:110000},get:()=>D.slides[i].img,setv:v=>D.slides[i].img=v,after:()=>go('slides'),okMsg:'✅ تم تحديث صورة البنر'})}
+function upTeacherImg(f,i){applyImage(f,{opts:{maxDim:300,maxBytes:40000},get:()=>D.teachers[i].img,setv:v=>D.teachers[i].img=v,after:()=>go('teachers'),okMsg:'✅ تم تحديث صورة الأستاذ'})}
+function upLogo(f){applyImage(f,{opts:{maxDim:400,maxBytes:40000,alpha:true},get:()=>D.profile.logo,setv:v=>D.profile.logo=v,after:()=>go('profile'),okMsg:'✅ تم تحديث الشعار'})}
+
+function exportD(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(D,null,1)],{type:'application/json'}));a.download='technolearn-backup.json';a.click()}
+function importD(f){if(!f)return;const r=new FileReader();r.onload=()=>{try{D=merge(cl(DEF),JSON.parse(r.result));delete D.settings.user;delete D.settings.pass;persist();go(tab);toast('✅ تم الاستيراد')}catch(e){toast('❌ ملف غير صالح')}};r.readAsText(f)}
+function resetD(){if(confirm('سيتم استبدال كل المحتوى بالقيم الافتراضية للجميع. متأكد؟')){D=cl(DEF);delete D.settings.user;delete D.settings.pass;persist();go(tab);toast('♻️ تمت الاستعادة')}}
+
+renderSite();
+if(!FB_ON)fetch('data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(!j)return;REMOTE=j;try{localStorage.setItem('tl_remote',JSON.stringify(j))}catch(e){}D=load();renderSite();if($('dash').classList.contains('on'))go(tab)}).catch(()=>{});
+
+/* ===== Firebase Setup ===== */
+const loadScript=u=>new Promise((ok,no)=>{const e=document.createElement('script');e.src=u;e.onload=ok;e.onerror=no;document.head.appendChild(e)});
+function trySeed(){if(seeded||!FBUSER||docExists!==false)return;seeded=true;try{const o=JSON.parse(localStorage.getItem(KEY)||'null');if(o){D=merge(cl(DEF),o);delete D.settings.user;delete D.settings.pass;renderSite()}}catch(e){}saveRemote()}
+async function initFB(){
+ const B='https://www.gstatic.com/firebasejs/10.12.2/';
+ await loadScript(B+'firebase-app-compat.js');
+ await Promise.all([loadScript(B+'firebase-auth-compat.js'),loadScript(B+'firebase-firestore-compat.js')]);
+ firebase.initializeApp(FIREBASE_CONFIG);AUTH=firebase.auth();DB=firebase.firestore();DOC=DB.doc('site/main');
+ let first=true;
+ DOC.onSnapshot(sn=>{docExists=sn.exists;if(sn.exists&&(first||!FBUSER)){REMOTE=sn.data();try{localStorage.setItem('tl_remote',JSON.stringify(REMOTE))}catch(e){}D=load();renderSite();if($('dash').classList.contains('on'))go(tab)}first=false;trySeed()},()=>{});
+ AUTH.onAuthStateChanged(u=>{FBUSER=u;if(!u&&$('dash').classList.contains('on'))closeDash();trySeed()});
+}
+if(FB_ON)initFB().catch(()=>{});
+
+/* ===== Install App Handler ===== */
+let deferredP=null;
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredP=e});
+addEventListener('appinstalled',()=>{deferredP=null;closeAll();toast('✅ تمت إضافة التطبيق لشاشتك')});
+function installApp(){
+ if(deferredP){deferredP.prompt();deferredP.userChoice.finally(()=>{deferredP=null});return}
+ const ua=navigator.userAgent,ios=/iphone|ipad|ipod/i.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),and=/android/i.test(ua),inApp=/FBAN|FBAV|Instagram|Telegram|WhatsApp|Line\//i.test(ua);
+ const L=a=>'<ol class="steps">'+a.map(x=>'<li>'+x+'</li>').join('')+'</ol>';
+ let h=inApp?'<div class="warn">⚠️ أنت تتصفح من داخل تطبيق (فيسبوك / انستغرام / تليغرام). افتح الرابط في متصفح Chrome أو Safari ثم أعد المحاولة.</div>':'';
+ h+=ios?L(['اضغط زر المشاركة ⬆️ في أسفل Safari','اختر «إضافة إلى الشاشة الرئيسية»','اضغط «إضافة»'])
+  :and?L(['اضغط القائمة ⋮ في أعلى Chrome','اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية»','اضغط «تثبيت»'])
+  :L(['اضغط أيقونة التثبيت ⊕ في شريط العنوان','أو من القائمة ⋮ اختر «حفظ ومشاركة» ثم «تثبيت الصفحة كتطبيق»']);
+ $('instBody').innerHTML=h;closeAll();$('installM').classList.add('on');
+}
+
+/* ===== أيقونة التطبيق = لوغو المنصة (تُولَّد تلقائياً من لوغو لوحة التحكم) ===== */
+let _iconKey='';
+function setAppIcon(src){
+  if(!src||_iconKey===src)return;_iconKey=src;
+  const img=new Image();
+  img.onload=()=>{
+    const make=(size,pad,bg)=>{
+      const c=document.createElement('canvas');c.width=c.height=size;const g=c.getContext('2d');
+      if(bg){g.fillStyle=bg;g.fillRect(0,0,size,size)}
+      const box=size*(1-pad*2),r=Math.max(box/img.naturalWidth,box/img.naturalHeight);
+      const w=img.naturalWidth*r,h=img.naturalHeight*r;
+      g.save();g.beginPath();g.rect(size*pad,size*pad,box,box);g.clip();
+      g.drawImage(img,(size-w)/2,(size-h)/2,w,h);g.restore();
+      return c.toDataURL('image/png');
+    };
+    let i192,i512,i180,m512;
+    try{i192=make(192,0);i512=make(512,0);i180=make(180,0);m512=make(512,.1,'#0d47a1')}catch(e){return}
+    /* أيقونة آيفون + أيقونة التبويب */
+    let a=document.querySelector('link[rel="apple-touch-icon"]');if(a)a.href=i180;
+    let f=document.querySelector('link[rel="icon"]');if(f){f.href=i192;f.type='image/png'}
+    /* manifest ديناميكي بالأيقونات الجديدة (أندرويد / كروم) */
+    const base=location.href.split('#')[0].split('?')[0],dir=base.replace(/[^\/]*$/,'');
+    const man={name:'TechnoLearn | منصة تقنية',short_name:(D.profile&&D.profile.title)||'TechnoLearn',description:'منصة TechnoLearn التقنية',
+      id:base,start_url:base,scope:dir,display:'standalone',lang:'ar',dir:'rtl',background_color:'#0d47a1',theme_color:'#0d47a1',
+      icons:[{src:i192,sizes:'192x192',type:'image/png',purpose:'any'},{src:i512,sizes:'512x512',type:'image/png',purpose:'any'},{src:m512,sizes:'512x512',type:'image/png',purpose:'maskable'}]};
+    const url=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/manifest+json'}));
+    let l=document.querySelector('link[rel="manifest"]');
+    if(l){const n=l.cloneNode();n.href=url;l.replaceWith(n)}
+    else{l=document.createElement('link');l.rel='manifest';l.href=url;document.head.appendChild(l)}
+    /* لوغو نافذة التثبيت */
+    const il=$('instLogo');if(il)il.src=i192;
+  };
+  img.onerror=()=>{_iconKey=''};
+  img.src=src;
+}
+
+/* ServiceWorker للـ PWA (ملف حقيقي sw.js - رابط Blob لا يعمل) */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js').catch(err=>console.warn('SW error:',err));
+  });
+}
+/* إخفاء زر التثبيت إذا كان التطبيق مثبتاً/يعمل كتطبيق */
+function hideInstallBtn(){const b=$('installBtnCard');if(b)b.style.display='none'}
+if(matchMedia('(display-mode: standalone)').matches||navigator.standalone)hideInstallBtn();
+addEventListener('appinstalled',hideInstallBtn);
+</script>
+</body>
+</html>
