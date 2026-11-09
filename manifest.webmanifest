@@ -1,0 +1,19 @@
+{
+  "name": "TechnoLearn | منصة تقنية",
+  "short_name": "TechnoLearn",
+  "description": "منصة TechnoLearn التقنية",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "ar",
+  "dir": "rtl",
+  "background_color": "#0d47a1",
+  "theme_color": "#0d47a1",
+  "icons": [
+    { "src": "no.jpg", "sizes": "192x192", "type": "image/jpeg", "purpose": "any" },
+    { "src": "no.jpg", "sizes": "512x512", "type": "image/jpeg", "purpose": "any" },
+    { "src": "no.jpg", "sizes": "512x512", "type": "image/jpeg", "purpose": "maskable" }
+  ]
+}
