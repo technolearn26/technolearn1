@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#0d47a1">
 <title>TechnoLearn | منصة تقنية</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="no.jpg">
-<link rel="apple-touch-icon" href="no.jpg">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="TechnoLearn">
@@ -382,6 +382,7 @@ const ICONS={
 };
 
 const WARAQATI_INFO='منصة أسئلتي تساعدك على تصميم ورقة امتحانية احترافية خلال دقائق.\nماذا تقدّم لك الخدمة؟\n- اختيار المرحلة الدراسية والمادة والنموذج المناسب\n- كتابة الأسئلة بسهولة مع إضافة الصور والجداول والأشكال\n- التحكم بإعدادات الورقة وترتيبها كما تريد\n- تصدير الورقة بصيغة PDF أو صورة جاهزة للطباعة\nاضغط «فتح الخدمة» للبدء، وإن احتجت أي مساعدة تواصل مع فريق التطبيق.';
+const MSTM_SVC={icon:'🪪',title:'ترتيب المستمسكات',desc:'جهّز صور الهويات والوثائق وارتبها للطباعة بسهولة.',info:'برنامج ترتيب المستمسكات يجهّز صور الهويات والوثائق الرسمية ويرتبها على ورقة جاهزة للطباعة والقص.\nماذا تقدّم لك الخدمة؟\n- رفع صورة الوجه والظهر لكل مستمسك\n- قص الصورة وتعديل ميلانها بإطار بمقابض وشريط تدوير\n- تحسين الإضاءة والتباين\n- تصدير PDF أو صورة بدقة عالية جاهزة للطباعة\nاضغط «فتح الخدمة» للبدء، وإن احتجت أي مساعدة تواصل مع فريق التطبيق.',logo:'',linkType:'url',phone:'',phoneMode:'call',url:'mostamsakat.html'};
 const CV_SVC={icon:'📄',title:'إنشاء سيرة ذاتية',desc:'صمّم سيرة ذاتية احترافية متوافقة مع أنظمة ATS بسهولة.',info:'منشئ السيرة الذاتية يساعدك على إعداد سيرة ذاتية احترافية ومتوافقة مع أنظمة ATS التي تفحصها الشركات قبل المقابلة.\nماذا تقدّم لك الخدمة؟\n- ثلاثة قوالب جاهزة بتصاميم نظيفة وسهلة القراءة\n- إدخال بياناتك ومعاينة السيرة مباشرة أثناء الكتابة\n- دعم عدة لغات منها العربية والإنكليزية\n- تحميل السيرة بصيغة PDF جاهزة للإرسال\nاضغط «فتح الخدمة» للبدء، وإن احتجت أي مساعدة تواصل مع فريق التطبيق.',logo:'',linkType:'url',phone:'',phoneMode:'call',url:'waraqati-cv.html'};
 const DEF={
  profile:{title:'TECHNOLEARN',tag:'منصة البحوث والمشاريع',logo:'no.jpg',sub:'منصة تقنية تقدم خدمات بحثية وتقارير علمية ومشاريع هندسية لجميع الأقسام.'},
@@ -412,7 +413,8 @@ const DEF={
   {icon:'⚙️',title:'المشاريع الهندسية',desc:'مشاريع هندسية لجميع الأقسام.',logo:''},
   {icon:'📑',title:'الترجمة المصدقة',desc:'ترجمة إنكليزية دقيقة ومصدّقة.',logo:''},
   {icon:'📝',title:'كتابة أسئلة',desc:'صمّم أوراقك الامتحانية بسهولة عبر منصة أسئلتي.',info:WARAQATI_INFO,logo:'',linkType:'url',phone:'',phoneMode:'call',url:'waraqati.html'},
-  {...CV_SVC}
+  {...CV_SVC},
+  {...MSTM_SVC}
  ],
  tools:[
   {icon:'📁',name:'Google Drive',desc:'تخزين سحابي مجاني بمساحة 15GB للملفات.',url:'https://drive.google.com',logo:''},
@@ -445,6 +447,10 @@ function load(){
   if(!d.flags.cv){
     d.flags.cv=true;
     if(!d.services.some(x=>x.url==='waraqati-cv.html'))d.services.push({...CV_SVC});
+  }
+  if(!d.flags.mstm){
+    d.flags.mstm=true;
+    if(!d.services.some(x=>x.url==='mostamsakat.html'))d.services.push({...MSTM_SVC});
   }
   return d;
 }
@@ -925,18 +931,7 @@ function setAppIcon(src){
     };
     let i192,i512,i180,m512;
     try{i192=make(192,0);i512=make(512,0);i180=make(180,0);m512=make(512,.1,'#0d47a1')}catch(e){return}
-    /* أيقونة آيفون + أيقونة التبويب */
-    let a=document.querySelector('link[rel="apple-touch-icon"]');if(a)a.href=i180;
-    let f=document.querySelector('link[rel="icon"]');if(f){f.href=i192;f.type='image/png'}
-    /* manifest ديناميكي بالأيقونات الجديدة (أندرويد / كروم) */
-    const base=location.href.split('#')[0].split('?')[0],dir=base.replace(/[^\/]*$/,'');
-    const man={name:'TechnoLearn | منصة تقنية',short_name:(D.profile&&D.profile.title)||'TechnoLearn',description:'منصة TechnoLearn التقنية',
-      id:base,start_url:base,scope:dir,display:'standalone',lang:'ar',dir:'rtl',background_color:'#0d47a1',theme_color:'#0d47a1',
-      icons:[{src:i192,sizes:'192x192',type:'image/png',purpose:'any'},{src:i512,sizes:'512x512',type:'image/png',purpose:'any'},{src:m512,sizes:'512x512',type:'image/png',purpose:'maskable'}]};
-    const url=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/manifest+json'}));
-    let l=document.querySelector('link[rel="manifest"]');
-    if(l){const n=l.cloneNode();n.href=url;l.replaceWith(n)}
-    else{l=document.createElement('link');l.rel='manifest';l.href=url;document.head.appendChild(l)}
+    /* الأيقونات والـ manifest ثابتة (ملفات حقيقية) لضمان عمل PWABuilder وتحويل APK */
     /* لوغو نافذة التثبيت */
     const il=$('instLogo');if(il)il.src=i192;
   };
